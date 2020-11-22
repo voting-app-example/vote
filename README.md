@@ -1,0 +1,2 @@
+# vote
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/4c68282e2b3c41688b3003c3f9882b8a)](https://app.codacy.com/gh/voting-app-example/vote?utm_source=github.com&utm_medium=referral&utm_content=voting-app-example/vote&utm_campaign=Badge_Grade_Settings)
