@@ -21,6 +21,26 @@ jobs:
       with:
         name: unit-tests-coverage
         path: coverage/coverage.xml
+
+  codacy-coverage-reporter:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Download code coverage results
+      uses: actions/download-artifact@v2
+      with:
+        name: unit-tests-coverage
+        path: $GITHUB_WORKSPACE/coverage/
+
+    - name: Run codacy-coverage-reporter
+        uses: codacy/codacy-coverage-reporter-action@master
+        with:
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          coverage-reports: $GITHUB_WORKSPACE/coverage/coverage.xml
   
   build:
     needs: test
