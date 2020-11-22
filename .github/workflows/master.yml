@@ -34,13 +34,13 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: unit-tests-coverage
-        path: $GITHUB_WORKSPACE/coverage/
+        path: ${{ env.GITHUB_WORKSPACE }}/coverage/
 
     - name: Run codacy-coverage-reporter
       uses: codacy/codacy-coverage-reporter-action@master
       with:
         project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
-        coverage-reports: $GITHUB_WORKSPACE/coverage/coverage.xml
+        coverage-reports: ${{ env.GITHUB_WORKSPACE }}/coverage/coverage.xml
   
   build:
     needs: test
