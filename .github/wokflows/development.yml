@@ -1,0 +1,72 @@
+name: Development CI
+
+on:
+  push:
+    branches:
+    - development
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Run unit tests
+      run: ./test/test.sh
+
+    - name: Upload coverage as an Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: unit-tests-coverage
+        path: coverage/coverage.xml
+  
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Build docker image
+      run: ./build.sh
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Install doctl
+      uses: digitalocean/action-doctl@v2
+      with:
+        token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+    - name: Log in to DO Container Registry with short-lived credentials
+      run: doctl registry login --expiry-seconds 600
+
+    - name: Publish docker image to DO Container Registry
+      run: ./publish.sh
+
+  deploy:
+    needs: publish
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Install kubectl
+      uses: azure/setup-kubectl@v1
+
+    - name: Decode kubeconfig
+      run: echo $STAGING_KUBERNETES_KUBECONFIG | base64 --decode > $GITHUB_WORKSPACE/deploy/kubeconfig.yml
+
+    - name: Deploy to DigitalOcean Kubernetes
+      run: ./deploy/deploy.sh
+
+    # TODO add rollout status check
