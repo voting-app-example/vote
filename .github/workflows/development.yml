@@ -49,21 +49,13 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Build docker image
-      run: ./build.sh
-
-  publish:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-
-    - name: Checkout
-      uses: actions/checkout@v2
-
     - name: Install doctl
       uses: digitalocean/action-doctl@v2
       with:
         token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+    - name: Build docker image
+      run: ./build.sh
 
     - name: Log in to DO Container Registry with short-lived credentials
       run: doctl registry login --expiry-seconds 600
