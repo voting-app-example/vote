@@ -64,7 +64,7 @@ jobs:
       run: ./publish.sh
 
   deploy:
-    needs: publish
+    needs: build
     runs-on: ubuntu-latest
     steps:
 
