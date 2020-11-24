@@ -81,3 +81,25 @@ jobs:
       run: ./deploy/deploy.sh
 
     # TODO add rollout status check
+
+  integration-test:
+    needs: deploy
+    runs-on: ubuntu-latest
+    env:
+      VOTE_PUBLIC_IP: ${{ secrets.STAGING_PUBLIC_IP }}
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Await for deployment
+      run: sleep 20
+
+    - name: Run integration tests using CodeceptJS
+      run: ./test/integration/integration_test.sh
+
+    - name: Upload results as an Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: integration-tests-result
+        path: test/integration/output/index.html
