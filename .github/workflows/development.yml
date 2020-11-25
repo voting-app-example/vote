@@ -114,8 +114,8 @@ jobs:
     - name: Run integration tests using CodeceptJS
       run: ./integration_test.sh
 
-    - name: Upload report as an Artifact
+    - name: Upload results as an Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: integration-tests-report
-        path: test/integration/output/mochawesome.html
+        name: integration-tests-results
+        path: test/integration/output/
