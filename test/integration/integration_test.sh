@@ -6,5 +6,5 @@ PUPPETEER_CONFIG=$(echo '{"helpers": {"Puppeteer": {"url": "<URL>:5000"}}}' | se
 
 INTEGRATION_DIRECTORY="$GITHUB_WORKSPACE/test/integration"
 
-docker run -v $INTEGRATION_DIRECTORY:/tests codeception/codeceptjs \
+docker run --net=host -v $INTEGRATION_DIRECTORY:/tests codeception/codeceptjs \
     codeceptjs run --override "$PUPPETEER_CONFIG" --steps
