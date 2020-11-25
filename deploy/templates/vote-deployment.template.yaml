@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: vote
-        image: registry.digitalocean.com/voting-app-example/vote:<TAG>
+        image: "registry.digitalocean.com/voting-app-example/vote:<TAG>"
         ports:
         - containerPort: 80
           name: vote
