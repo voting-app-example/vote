@@ -9,11 +9,7 @@ exports.config = {
     }
   },
   bootstrap: null,
-  mocha: {
-    reporterOptions: {
-      reportDir: './output'
-    },
-  },
+  mocha: {},
   include: {},
   name: 'integration',
   plugins: {

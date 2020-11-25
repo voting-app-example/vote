@@ -104,4 +104,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: integration-tests-result
-        path: test/integration/output/index.html
+        path: test/integration/output/
