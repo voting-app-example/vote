@@ -6,3 +6,4 @@ obj/
 .vscode/
 node_modules/
 coverage/
+package-lock.json

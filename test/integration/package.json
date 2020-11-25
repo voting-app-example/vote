@@ -14,7 +14,7 @@
         "@codeceptjs/configure": "^0.6.2",
         "@codeceptjs/examples": "^1.2.1",
         "@codeceptjs/ui": "^0.4.2",
-        "codeceptjs": "^3.0.0",
+        "codeceptjs": "^3.0.1",
         "mocha": "^8.2.1",
         "playwright": "^1.6.2"
     },
