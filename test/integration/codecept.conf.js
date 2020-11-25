@@ -2,14 +2,17 @@ exports.config = {
   tests: './*_test.js',
   output: './output',
   helpers: {
-    Puppeteer: {
+    Playwright: {
       url: 'http://localhost',
       show: false,
-      windowSize: '1200x900'
     }
   },
   bootstrap: null,
-  mocha: {},
+  mocha: {
+    reporterOptions: {
+      reportDir: "./output"
+    }
+  },
   include: {},
   name: 'integration',
   plugins: {

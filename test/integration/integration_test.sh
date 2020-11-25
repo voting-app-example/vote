@@ -2,9 +2,6 @@
 
 set -e
 
-PUPPETEER_CONFIG=$(echo '{"helpers": {"Puppeteer": {"url": "<URL>:5000"}}}' | sed 's/<URL>/'$VOTE_PUBLIC_IP'/g')
+PLAYWRIGHT_CONFIG=$(echo '{"helpers": {"Playwright": {"url": "<URL>:5000"}}}' | sed 's/<URL>/'$VOTE_PUBLIC_IP'/g')
 
-INTEGRATION_DIRECTORY="$GITHUB_WORKSPACE/test/integration"
-
-docker run --net=host -v $INTEGRATION_DIRECTORY:/tests codeception/codeceptjs:2.5.0 \
-    codeceptjs run --override "$PUPPETEER_CONFIG" --steps
+npx codeceptjs run --reporter mochawesome --override "$PUPPETEER_CONFIG" --steps
