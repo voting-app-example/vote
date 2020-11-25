@@ -66,6 +66,8 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    env:
+      PRODUCTION_KUBERNETES_KUBECONFIG: ${{ secrets.PRODUCTION_KUBERNETES_KUBECONFIG }}
     steps:
 
     - name: Checkout
