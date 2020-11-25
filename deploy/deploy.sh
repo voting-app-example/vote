@@ -8,4 +8,4 @@ sed 's/<TAG>/'$TAG'/g' $TEMPLATE_FILE > $GITHUB_WORKSPACE/deploy/manifests/vote-
 
 KUBECONFIG_FILE="$GITHUB_WORKSPACE/deploy/kubeconfig.yml"
 
-kubectl --kubeconfig=$KUBECONFIG_FILE apply -f $GITHUB_WORKSPACE/deploy/manifests/
+kubectl --kubeconfig=$KUBECONFIG_FILE apply --overwrite -f $GITHUB_WORKSPACE/deploy/manifests/
